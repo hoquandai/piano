@@ -1,0 +1,25 @@
+--- !ruby/object:Railsui::Configuration
+application_name: Rails UI
+support_email: support@example.com
+theme: hound
+pages:
+- about
+- pricing
+- dashboard
+- projects
+- project
+- messages
+- message
+- assignments
+- calendar
+- people
+- profile
+- activity
+- settings
+- notifications
+- billing
+- team
+- integrations
+build_mode: nobuild
+body_classes: antialiased h-full bg-slate-50 dark:bg-slate-900 dark:text-slate-100
+  text-slate-800

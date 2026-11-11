@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <% if Railsui.config.build_mode == "build" %>
+      <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <% else %>
+      <%= javascript_importmap_tags %>
+    <% end %>
+
+    <%= railsui_head %>
+  </head>
+
+  <body class="<%= railsui_body_classes %>">
+    <%= render "rui/shared/flash" %>
+    <% if content_for(:header).present? %>
+      <%= yield :header %>
+    <% else %>
+      <%= render "rui/shared/nav" %>
+    <% end %>
+    <%= yield %>
+    <%= railsui_launcher if Rails.env.development? %>
+  </body>
+</html

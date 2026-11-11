@@ -1,0 +1,15 @@
+# Pin npm packages by running ./bin/importmap
+
+pin "application"
+pin "@hotwired/turbo-rails", to: "turbo.min.js"
+pin "@hotwired/stimulus", to: "stimulus.min.js"
+pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
+pin_all_from "app/javascript/controllers", under: "controllers"
+pin "trix"
+pin "@rails/actiontext", to: "actiontext.esm.js"
+pin "railsui-stimulus", to: "https://unpkg.com/railsui-stimulus@1.1.2/dist/importmap/index.js"
+pin "tippy.js", to: "https://esm.sh/tippy.js@6.3.7"
+pin "@popperjs/core", to: "https://esm.sh/@popperjs/core@2.11.8"
+pin "stimulus-use", to: "https://esm.sh/stimulus-use@0.52.2"
+pin "flatpickr", to: "https://esm.sh/flatpickr@4.6.13"
+pin "apexcharts", to: "https://esm.sh/apexcharts@3.45.2"

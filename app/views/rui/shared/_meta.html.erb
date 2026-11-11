@@ -1,0 +1,46 @@
+<%#
+Meta tags for SEO and social sharing.
+
+This uses Rails UI's built-in railsui_meta_tags helper which outputs:
+- Title tag
+- Viewport meta tag
+- Description meta tag
+- Canonical URL
+- Open Graph tags (title, type, url, image, description, site_name)
+- Social card tags (card, title, description, image)
+- Favicon links
+
+Basic Usage:
+
+  railsui_meta_tags
+
+Customizing per-page:
+
+  railsui_meta_tags(
+    title: "About Us",
+    description: "Learn more about our company."
+  )
+
+All available options:
+
+  railsui_meta_tags(
+    site: "My App",
+    title: "Page Title",
+    description: "Page description",
+    image: "meta/opengraph.jpg",
+    card_image: "meta/card.jpg",
+    og_type: "website",
+    card_type: "summary"
+  )
+
+Previewing: https://www.opengraph.xyz/
+Generate icons: https://redketchup.io/favicon-generator
+
+Images:
+Swap your own images for placeholder ones inside the "assets/images/railsui/meta" folder.
+%>
+
+<%= railsui_meta_tags(
+  title: "CHANGE ME",
+  description: "CHANGE ME"
+) %>

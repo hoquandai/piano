@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@import "../stylesheets/actiontext";
+
+@import "../stylesheets/railsui/actiontext";
+@import "../stylesheets/railsui/buttons";
+@import "../stylesheets/railsui/forms";
+@import "../stylesheets/railsui/headings";
+@import "../stylesheets/railsui/navigation";
+@import "../stylesheets/railsui/theme";
