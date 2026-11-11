@@ -7,6 +7,22 @@ class Rui::PagesController < ApplicationController
     end
   end
 
+  def tools
+    render "rui/pages/tools", layout: "rui/railsui_admin"
+  end
+
+  def convert
+    musicxml = PdfToMusicxmlConverter.new(params[:pdf]).call
+
+    send_data musicxml,
+      filename: "converted-score.mxl",
+      type: "application/vnd.recordare.musicxml",
+      disposition: "attachment"
+  rescue PdfToMusicxmlConverter::ConversionError => error
+    flash.now[:alert] = error.message
+    render "rui/pages/tools", layout: "rui/railsui_admin", status: :unprocessable_entity
+  end
+
   private
 
   def determine_layout(page)

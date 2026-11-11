@@ -4,5 +4,10 @@
     <%= content_tag :li do %>
       <%= nav_link_to details['title'], send(details['path'].to_sym), class: "rui-nav-link--admin" %>
     <% end %>
+    <% if page.to_s == "dashboard" %>
+      <%= content_tag :li do %>
+        <%= nav_link_to "Tools", rui_tools_path, class: "rui-nav-link--admin" %>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

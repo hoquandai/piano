@@ -1,0 +1,25 @@
+<% content_for :header do %>
+  <%= render "rui/shared/admin/nav", { header_title: "Tools" } do %>
+    <%= render "rui/shared/admin/create_dropdown" %>
+  <% end %>
+<% end %>
+
+<div class="px-4">
+  <div class="container mx-auto max-w-2xl py-8">
+    <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-xs dark:border-slate-700 dark:bg-slate-800">
+      <h2 class="h4 mb-2">Convert PDF to MusicXML</h2>
+      <p class="mb-6 text-sm text-slate-500 dark:text-slate-400">
+        Upload a score PDF up to 20 MB. Conversion runs locally on this server. The result downloads as a compressed MusicXML file (.mxl).
+      </p>
+
+      <%= form_with url: rui_tools_convert_path, method: :post, multipart: true, data: { turbo: false }, class: "space-y-4" do |form| %>
+        <div>
+          <%= form.label :pdf, "Score PDF", class: "form-label" %>
+          <%= form.file_field :pdf, accept: "application/pdf,.pdf", required: true, class: "form-input" %>
+        </div>
+
+        <%= form.submit "Convert to MusicXML", class: "btn btn-primary" %>
+      <% end %>
+    </section>
+  </div>
+</div>

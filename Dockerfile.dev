@@ -11,12 +11,22 @@
 ARG RUBY_VERSION=3.4.1
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
+ARG AUDIVERIS_VERSION=5.11.0
+ARG AUDIVERIS_PACKAGE_SHA256=ae714594f40e54b1a4951fc3f914f08ae38fe5d07b7f2283b1a904fdb6e0a318
+
 # Rails app lives here
 WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl default-mysql-client libjemalloc2 libvips && \
+    apt-get install --no-install-recommends -y curl default-mysql-client libgtk-3-0 libjemalloc2 libvips && \
+    curl -fsSL "https://github.com/Audiveris/audiveris/releases/download/${AUDIVERIS_VERSION}/Audiveris-${AUDIVERIS_VERSION}-ubuntu22.04-x86_64.deb" -o /tmp/audiveris.deb && \
+    echo "${AUDIVERIS_PACKAGE_SHA256}  /tmp/audiveris.deb" | sha256sum -c - && \
+    mkdir -p /usr/share/applications /usr/share/desktop-directories && \
+    apt-get install --no-install-recommends -y /tmp/audiveris.deb && \
+    rm /tmp/audiveris.deb && \
+    ln -s /usr/lib/$(uname -m)-linux-gnu/libgtk-3.so.0 /usr/lib/$(uname -m)-linux-gnu/libgtk-3.so && \
+    ln -s /opt/audiveris/bin/Audiveris /usr/local/bin/audiveris && \
     ln -s /usr/lib/$(uname -m)-linux-gnu/libjemalloc.so.2 /usr/local/lib/libjemalloc.so && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 

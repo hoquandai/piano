@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     get "about", to: "pages#about"
     get "pricing", to: "pages#pricing"
     get "dashboard", to: "pages#dashboard"
+    get "tools", to: "pages#tools"
+    post "tools/convert", to: "pages#convert", as: :tools_convert
     get "projects", to: "pages#projects"
     get "project", to: "pages#project"
     get "messages", to: "pages#messages"
