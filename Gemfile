@@ -66,3 +66,6 @@ group :test do
 end
 
 gem "railsui", "~> 3.4"
+gem "rubyzip", "~> 3.7"
+
+gem "pdf-reader", "~> 2.16"

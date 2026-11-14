@@ -1,0 +1,35 @@
+<% content_for :header do %>
+  <%= render "rui/shared/admin/nav", { header_title: "Score Preview" } do %>
+    <%= render "rui/shared/admin/create_dropdown" %>
+  <% end %>
+<% end %>
+
+<div class="px-4">
+  <div class="container mx-auto max-w-6xl space-y-6 py-8">
+    <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-xs dark:border-slate-700 dark:bg-slate-800"
+      data-controller="score-preview"
+      data-score-preview-musicxml-url-value="<%= rui_tools_score_data_path(params[:token]) %>"
+      data-score-preview-pdf-filename-value="<%= "#{@score_download_basename}.pdf" %>">
+      <div class="flex flex-col gap-4 border-b border-slate-200 pb-4 dark:border-slate-700 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 class="h4 mb-1">Score</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400">
+            Preview the converted score or download it as MusicXML or PDF.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <%= link_to "Download MusicXML", rui_tools_score_musicxml_path(params[:token]),
+            class: "btn btn-secondary" %>
+          <button type="button" class="btn btn-primary" data-score-preview-target="pdfButton"
+            data-action="score-preview#downloadPdf" disabled>
+            Download PDF
+          </button>
+        </div>
+      </div>
+
+      <p class="mt-4 text-sm text-slate-500 dark:text-slate-400" role="status" aria-live="polite"
+        data-score-preview-target="status">Loading score...</p>
+      <div class="mt-6 overflow-x-auto" data-score-preview-target="score"></div>
+    </section>
+  </div>
+</div>

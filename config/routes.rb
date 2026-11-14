@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     get "dashboard", to: "pages#dashboard"
     get "tools", to: "pages#tools"
     post "tools/convert", to: "pages#convert", as: :tools_convert
+    post "tools/visualize", to: "pages#visualize", as: :tools_visualize
+    get "tools/scores/:token", to: "pages#score", as: :tools_score
+    get "tools/scores/:token/data", to: "pages#score_data", as: :tools_score_data
+    get "tools/scores/:token/musicxml", to: "pages#download_musicxml", as: :tools_score_musicxml
     get "projects", to: "pages#projects"
     get "project", to: "pages#project"
     get "messages", to: "pages#messages"

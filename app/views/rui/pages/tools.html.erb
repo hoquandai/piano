@@ -5,11 +5,12 @@
 <% end %>
 
 <div class="px-4">
-  <div class="container mx-auto max-w-2xl py-8">
+  <div class="container mx-auto max-w-5xl space-y-6 py-8">
     <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-xs dark:border-slate-700 dark:bg-slate-800">
       <h2 class="h4 mb-2">Convert PDF to MusicXML</h2>
       <p class="mb-6 text-sm text-slate-500 dark:text-slate-400">
-        Upload a score PDF up to 20 MB. Conversion runs locally on this server. The result downloads as a compressed MusicXML file (.mxl).
+        Upload a score PDF up to 20 MB. Conversion runs locally and opens a score preview with downloads.
+        PDF metadata and extractable page text are retained in the MusicXML output; title and composer are also shown in the preview when available.
       </p>
 
       <%= form_with url: rui_tools_convert_path, method: :post, multipart: true, data: { turbo: false }, class: "space-y-4" do |form| %>
@@ -18,8 +19,30 @@
           <%= form.file_field :pdf, accept: "application/pdf,.pdf", required: true, class: "form-input" %>
         </div>
 
-        <%= form.submit "Convert to MusicXML", class: "btn btn-primary" %>
+        <%= form.submit "Convert and preview", class: "btn btn-primary" %>
       <% end %>
+    </section>
+
+    <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-xs dark:border-slate-700 dark:bg-slate-800"
+      data-controller="musicxml-visualizer">
+      <h2 class="h4 mb-2">Preview MusicXML score</h2>
+      <p class="mb-6 text-sm text-slate-500 dark:text-slate-400">
+        Upload a MusicXML score (.musicxml, .xml, or .mxl) to preview it and download the MusicXML or rendered PDF.
+      </p>
+
+      <%= form_with url: rui_tools_visualize_path, method: :post, multipart: true,
+        data: { turbo: false, action: "submit->musicxml-visualizer#submit", musicxml_visualizer_target: "form" },
+        class: "flex flex-col gap-4 sm:flex-row sm:items-end" do |form| %>
+        <div class="min-w-0 flex-1">
+          <%= form.label :score, "MusicXML score", class: "form-label" %>
+          <%= form.file_field :score, accept: ".musicxml,.xml,.mxl,application/vnd.recordare.musicxml,application/vnd.recordare.musicxml+xml,application/vnd.recordare.musicxml.mxl",
+            required: true, class: "form-input" %>
+        </div>
+        <%= form.submit "Preview score", class: "btn btn-primary", data: { musicxml_visualizer_target: "submit" } %>
+      <% end %>
+
+      <p class="mt-4 text-sm text-slate-500 dark:text-slate-400" role="status" aria-live="polite"
+        data-musicxml-visualizer-target="status"></p>
     </section>
   </div>
 </div>
